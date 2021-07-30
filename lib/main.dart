@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_notelist/notlarim.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,10 +65,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(child: Column(
+        children: [
+          Flexible(flex: 3,child: Container(color: Colors.green,)),
+          Flexible(flex:4,child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: GestureDetector(onTap: (){
+              print('notlarım tıklandı');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => notlarim()));
+            },child: Text('Notlarım',style: TextStyle(fontSize: 20),)),
+          ),),
+        ],
+      ),),
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
+      body:Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           TextField(maxLines: 1,controller: _controllertitle,onChanged: (val){

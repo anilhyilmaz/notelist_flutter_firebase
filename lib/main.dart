@@ -54,6 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
       CollectionReference notelistRef = FirebaseFirestore.instance.collection('notelist');
       Map<String,dynamic> noteData = {'title':val_title,'note':val_note};
       notelistRef.add(noteData);
+      _controllernote.clear();
+      _controllertitle.clear();
+      Center(child: AlertDialog(title: Text('Added Successfully'),));
       print('$val_title');
       print('$val_note');
       // notelistRef.add({'title':'$val_title'});
@@ -68,6 +71,15 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(child: Column(
         children: [
           Flexible(flex: 3,child: Container(color: Colors.green,)),
+          Flexible(flex:4,child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: GestureDetector(onTap: (){
+              print('Main Page tıklandı');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: 'Main Page')));
+            },child: Text('Main Page',style: TextStyle(fontSize: 20),)),
+          )),
           Flexible(flex:4,child: Padding(
             padding: const EdgeInsets.all(32.0),
             child: GestureDetector(onTap: (){
